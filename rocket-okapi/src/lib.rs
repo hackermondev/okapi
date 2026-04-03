@@ -271,14 +271,14 @@ macro_rules! get_nested_endpoints_and_docs {
 macro_rules! openapi_get_routes {
     // With settings
     ($settings:ident :
-     $($route:expr),* $(,)*) => {{
+     $($route:path),* $(,)*) => {{
         let spec = rocket_okapi::openapi_spec![$($route),*](&$settings);
         let routes = rocket_okapi::openapi_routes![$($route),*](Some(spec), &$settings);
         routes
     }};
 
     // Without settings
-    ($($route:expr),* $(,)*) => {{
+    ($($route:path),* $(,)*) => {{
         let settings = rocket_okapi::settings::OpenApiSettings::new();
         rocket_okapi::openapi_get_routes![settings: $($route),*]
     }};
@@ -310,14 +310,14 @@ macro_rules! openapi_get_routes {
 macro_rules! openapi_get_routes_spec {
     // With settings
     ($settings:ident :
-     $($route:expr),* $(,)*) => {{
+     $($route:path),* $(,)*) => {{
         let spec = rocket_okapi::openapi_spec![$($route),*](&$settings);
         let routes = rocket_okapi::openapi_routes![$($route),*](None, &$settings);
         (routes, spec)
     }};
 
     // Without settings
-    ($($route:expr),* $(,)*) => {{
+    ($($route:path),* $(,)*) => {{
         let settings = rocket_okapi::settings::OpenApiSettings::new();
         rocket_okapi::openapi_get_routes_spec![settings: $($route),*]
     }};
@@ -343,13 +343,13 @@ macro_rules! openapi_get_routes_spec {
 macro_rules! openapi_get_spec {
     // With settings
     ($settings:ident :
-     $($route:expr),* $(,)*) => {{
+     $($route:path),* $(,)*) => {{
         let spec = rocket_okapi::openapi_spec![$($route),*](&$settings);
         spec
     }};
 
     // Without settings
-    ($($route:expr),* $(,)*) => {{
+    ($($route:path),* $(,)*) => {{
         let settings = rocket_okapi::settings::OpenApiSettings::new();
         rocket_okapi::openapi_get_spec![settings: $($route),*]
     }};
